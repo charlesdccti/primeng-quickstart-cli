@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Car } from './domain/car';
 import { CarService } from './services/carservice';
 
+
 export class PrimeCar implements Car {
     constructor(public vin?, public year?, public brand?, public color?) {}
 }
@@ -15,20 +16,19 @@ export class PrimeCar implements Car {
 export class AppComponent implements OnInit {
 
     displayDialog: boolean;
-
     car: Car = new PrimeCar();
-
     selectedCar: Car;
-
     newCar: boolean;
-
     cars: Car[];
-
     cols: any[];
+    yearFilter: number;
+    yearTimeout: any;
+    value: Date;
 
     constructor(private carService: CarService) { }
 
     ngOnInit() {
+        this.mapa();
         this.carService.getCarsSmall().then(cars => this.cars = cars);
 
         this.cols = [
@@ -72,5 +72,25 @@ export class AppComponent implements OnInit {
 
     findSelectedCarIndex(): number {
         return this.cars.indexOf(this.selectedCar);
+    }
+
+    onYearChange(event, dt) {
+        if (this.yearTimeout) {
+            clearTimeout(this.yearTimeout);
+        }
+
+        this.yearTimeout = setTimeout(() => {
+            dt.filter(event.value, 'year', 'gt');
+        }, 250);
+    }
+
+    options: any;
+    overlays: any[];
+
+    mapa() {
+        this.options = {
+            center: {lat: 36.890257, lng: 30.707417},
+            zoom: 12
+        };
     }
 }

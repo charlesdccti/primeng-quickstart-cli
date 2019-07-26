@@ -1,0 +1,27 @@
+<h1>Clientes</h1>
+
+<p-panel header="Cadastro"  [style]="{'margin-bottom':'20px'}">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+            <span>Username</span>
+            <input id="float-input" type="text" size="30" pInputText>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+            <span>Password</span>
+            <input pPassword type="password" />
+        </div>
+
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <span>Phone</span>
+                <p-inputMask mask="(999) 999-9999" [(ngModel)]="val2" placeholder="(999) 999-9999"></p-inputMask>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <span>Data de Nascimento</span>
+                <p-calendar [(ngModel)]="date3" [showIcon]="true"></p-calendar>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <span>Avaliacao</span>
+                <p-rating [(ngModel)]="val1"></p-rating>
+        </div>
+    </div>
+</p-panel>
